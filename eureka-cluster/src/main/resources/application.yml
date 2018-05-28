@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: eureka-cluster
+
+---
+spring:
+  profiles: server1
+
+server:
+  port: 8891
+
+eureka:
+  instance:
+    hostname: server1
+#    hostname: ${spring.cloud.client.ipAddress}  
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}  
+#    prefer-ip-address: true
+#    nonSecurePort: ${server.port}
+  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://server2:8892/eureka/,http://server3:8893/eureka/
+
+---
+spring:
+  profiles: server2
+
+server:
+  port: 8892
+
+eureka:
+  instance:
+    hostname: server2
+  client:
+    serviceUrl:
+      defaultZone: http://server1:8891/eureka/,http://server3:8893/eureka/
+
+---
+spring:
+  profiles: server3
+
+server:
+  port: 8893
+
+eureka:
+  instance:
+    hostname: server3
+  client:
+    serviceUrl:
+      defaultZone: http://server1:8891/eureka/,http://server2:8892/eureka/

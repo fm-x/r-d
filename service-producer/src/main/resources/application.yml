@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: fm-service-producer
+  cloud:
+    config:
+      server:
+        git:    
+          uri: https://github.com/fm-x/configuration-center # git仓库的地址
+          search-paths: msg                                 # git仓库地址下的相对地址，可以配置多个<用,分割>。
+          username:                                         # git仓库的账号
+          password:                                         # git仓库的密码
+    bus:
+      refresh:
+        enabled: true
+      trace:
+        enabled: true # 开启消息跟踪
+  zipkin:
+    base-url: http://localhost:10011
+  sleuth:
+    sampler:
+      percentage: 1.0 # 采样比例(0.0 ~ 1.0)
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user-cloud
+    password: 123
+  
+
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 15000    # client发送心跳给server端的频率，默认30秒
+    lease-expiration-duration-in-seconds: 30000 # server至上一次收到client端的心跳之后，等待下一次心跳的超时时间，默认为90秒
+  server:
+    eviction-interval-timer-in-ms: 5000         # server清理无效节点的时间间隔，默认60秒
+    enable-self-preservation: true              # 是否开启自我保护模式，默认为true
+  client:
+    registry-fetch-interval-seconds: 5000       # 读取服务注册信息频率，默认为30秒
+    serviceUrl:
+      defaultZone: http://localhost:8891/eureka/
+
+management:
+  security:
+    enabled: false  # 刷新时，关闭安全验证
+  endpoints:
+    web:
+      exposure:
+        include: "*" # 暴露端点(health,mappings,bus-refresh)
+
+---
+spring:
+  profiles: p1
+
+server:
+  port: 9001
+...
+
+---
+spring:
+  profiles: p2
+
+server:
+  port: 9002
+...
+      

@@ -1,0 +1,63 @@
+spring:
+  zipkin:
+    baseUrl: http://localhost:10011
+  sleuth:
+    sampler:
+      percentage: 1.0 # 采样比例(0.0 ~ 1.0)
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user-cloud
+    password: 123      
+
+feign:
+  hystrix:
+    enabled: true
+
+ribbon:
+  MaxAutoRetries : 2 # 当前服务的重试次数
+  MaxAutoRetriesNextServer: 1 # 切换相同Server的次数
+  ServerListRefreshInterval: 3000 # #eureka客户端ribbon刷新时间
+
+management:
+  security:
+    enabled: false  # 刷新时，关闭安全验证
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: hystrix.stream
+
+zuul:
+#  routes:
+#      msg:
+#        path: ${customer.tag.zuul-msg}/**
+#        serviceId: ${producer.serviceId.msg}
+#  FormBodyWrapperFilter:
+#    pre:
+#      disable: true # 禁用Filter+
+  retryable: true
+      
+customer:
+  tag: # 服务端服务根路径
+    zuul-msg: /cst
+
+---
+spring:
+  profiles: x1
+  application:
+    name: msg-cstm-x1
+
+server:
+  port: 10101
+...
+
+---
+spring:
+  profiles: x2
+  application:
+    name: msg-cstm-x2
+
+server:
+  port: 10102
+...

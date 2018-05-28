@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: sleuth-zipkin-server
+
+server:
+  port: 10011
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5000 # 读取服务注册信息频率，默认为30秒
+    serviceUrl:
+      defaultZone: http://localhost:8891/eureka/

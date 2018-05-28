@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!-- spring环境配置变量 -->
+<!-- 	<springProperty scope="context" name="appName" source="spring.application.name"/> -->
+	<property name="appName" value="prd" />
+	<property name="logDir" value="./logs/${appName}" />
+	
+	<!-- log上下文 -->
+	<contextName>${appName}</contextName>
+	
+	<!-- 状态监听器 -->
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+	
+	<!-- 定义控制台输出 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 定义过滤器 相比logger内定义优先级高   -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<!-- 定义日志格式 -->
+<!--		<layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>-->
+<!--		</layout>-->
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger[%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 系统日志 -->
+	<appender name="allLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>false</prudent>
+<!-- 		 <file>${logDir}/sysAll.log</file> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysAll%d{yyyyMMdd}#%i.log.gz</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>    
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+	    </rollingPolicy>
+	    
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger[%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 错误日志 -->
+	<appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--		<file>${logback.logMainHome}/errorCurrent.log</file>-->
+		<prudent>true</prudent>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<!-- 滚动策略 -->
+<!-- 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> -->
+<!-- 			<FileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</FileNamePattern> -->
+<!-- 			<MaxHistory>31</MaxHistory> -->
+<!-- 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">   -->
+<!-- 		    	<maxFileSize>30MB</maxFileSize>   -->
+<!-- 		    </timeBasedFileNamingAndTriggeringPolicy>   -->
+<!-- 		</rollingPolicy> -->
+		
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</fileNamePattern>
+			<maxFileSize>50MB</maxFileSize>    
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
+	    </rollingPolicy>
+    
+<!--		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+<!--			<FileNamePattern>${logback.logMainHome}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</FileNamePattern>-->
+<!--			<MinIndex>1</MinIndex>-->
+<!--			<MaxIndex>21</MaxIndex>-->
+<!--		</rollingPolicy>-->
+<!--		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+<!--			<MaxFileSize>1MB</MaxFileSize>-->
+<!--		</triggeringPolicy>-->
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger[%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender> 
+	
+	<!-- 错误日志异步到数据库 -->
+<!--    <appender name="dbAppender" class="ch.qos.logback.classic.db.DBAppender">-->
+<!--    	<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--			<level>ERROR</level>-->
+<!--			<onMatch>ACCEPT</onMatch>-->
+<!--			<onMismatch>DENY</onMismatch>-->
+<!--		</filter>-->
+<!--        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">-->
+			<!-- 连接池 -->
+<!--           	<dataSource class="org.apache.commons.dbcp.BasicDataSource">-->
+<!--              	<driverClass>${db.driver}</driverClass>-->
+<!--	           	<url>${db.url}</url>-->
+<!--              	<user>${db.user}</user>-->
+<!--              	<password>${db.password}</password>-->
+<!--            </dataSource>-->
+<!--        </connectionSource>-->
+<!--  	</appender>-->
+	
+	<!-- 系统日志JMS同步 -->
+<!--	<appender name="jmsAppender" class="ch.qos.logback.classic.net.JMSQueueAppender">-->
+<!--		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--			<level>info</level>-->
+<!--		</filter>-->
+<!--		<InitialContextFactoryName>${logback.InitialContextFactoryName}</InitialContextFactoryName>-->
+<!--		<ProviderURL>${logback.providerURL}</ProviderURL>-->
+<!--		<QueueConnectionFactoryBindingName>-->
+<!--			${logback.queueConnectionFactoryBindingName}-->
+<!--		</QueueConnectionFactoryBindingName>-->
+<!--		<QueueBindingName>${logback.queueBindingName}</QueueBindingName>-->
+<!--	</appender>-->
+	
+	<!-- 各接口日志单独配置 -->
+<!--	<appender name="fileTest" class="ch.qos.logback.core.FileAppender">-->
+<!--		<file>${logback.logMainHome}/test.log</file>-->
+<!--		<prudent>true</prudent>-->
+<!--		<append>true</append>-->
+<!--		<encoder>-->
+<!--			<charset>UTF-8</charset>-->
+<!--			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger[%file:%line] - %msg%n</pattern>-->
+<!--		</encoder>-->
+<!--	</appender>-->
+<!--	<logger name="com.netpf.cloud.test" level="info" additivity="false">-->
+<!--		<appender-ref ref="console" />-->
+<!--		<appender-ref ref="fileTest" />-->
+<!--	</logger>-->
+	
+	<logger name="org.springframework" level="info"/>
+	<logger name="org.springframework.boot.devtools" level="warn"/>
+   	<logger name="org.apache.activemq" level="info"/>
+    
+	<root level="info">
+		<appender-ref ref="console" />
+		<appender-ref ref="allLog" />
+		<appender-ref ref="errorLog" />
+<!--		<appender-ref ref="jmsAppender" />-->
+	</root>
+	
+</configuration>
