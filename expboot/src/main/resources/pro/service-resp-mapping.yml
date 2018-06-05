@@ -1,0 +1,20 @@
+﻿--- # Service corresponding information mapping configuration
+cfg:
+  service:
+    ok:
+      code: 00000
+      msg: 成功
+    exception.timeout:
+      code: 00100
+      msg: 超时
+    error.param:
+      code: 01000
+      msg: 参数错误
+...
+
+--- # Third party information
+third:
+  url: http://23.126.78.10/test
+...
+
+      
