@@ -19,6 +19,9 @@ public class ApplicationProperties {
 	@Value("${third.url}")
 	private String thirdUrl;
 
+	@Value("${spring.application.name}")
+	private String appName;
+
 	public Map<String, String> getService() {
 		return service;
 	}
@@ -33,6 +36,14 @@ public class ApplicationProperties {
 
 	public void setThirdUrl(String thirdUrl) {
 		this.thirdUrl = thirdUrl;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
 	}
 
 }

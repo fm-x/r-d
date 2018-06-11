@@ -1,4 +1,4 @@
-package com.fm.expboot.common;
+package com.fm.expboot.common.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class WebExceptionHandler {
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ServiceResponse handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
 		logger.error("参数解析失败", e);
-		return ServiceResponseHandle.failed("could_not_read_json");
+		return ServiceResponseHandler.failed("could_not_read_json");
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class WebExceptionHandler {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ServiceResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
 		logger.error("不支持当前请求方法", e);
-		return ServiceResponseHandle.failed("request_method_not_supported");
+		return ServiceResponseHandler.failed("request_method_not_supported");
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class WebExceptionHandler {
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
 	public ServiceResponse handleHttpMediaTypeNotSupportedException(Exception e) {
 		logger.error("不支持当前媒体类型", e);
-		return ServiceResponseHandle.failed("content_type_not_supported");
+		return ServiceResponseHandler.failed("content_type_not_supported");
 	}
 
 	/**
@@ -53,12 +53,12 @@ public class WebExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ServiceResponse handleException(Exception e) {
 		if (e instanceof BusinessException) {
-			return ServiceResponseHandle.failed("BUSINESS_ERROR", e.getMessage());
+			return ServiceResponseHandler.failed("BUSINESS_ERROR", e.getMessage());
 		}
 
 		logger.error("服务运行异常", e);
 		e.printStackTrace();
-		return ServiceResponseHandle.failed("server_error");
+		return ServiceResponseHandler.failed("server_error");
 	}
 
 }

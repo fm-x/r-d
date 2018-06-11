@@ -1,6 +1,6 @@
-package com.fm.expboot.common;
+package com.fm.expboot.common.exception;
 
-public class ServiceResponseHandle {
+public class ServiceResponseHandler {
 
 	public static ServiceResponse failed(String string) {
 		// TODO Auto-generated method stub

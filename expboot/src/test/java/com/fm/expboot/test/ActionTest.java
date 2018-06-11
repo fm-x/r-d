@@ -1,4 +1,4 @@
-package com.fm.expboot;
+package com.fm.expboot.test;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class ActionTest {
 
 	@Test
 	public void getHello() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/user")
+		mvc.perform(MockMvcRequestBuilders.get("/user/get")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				// .andExpect(content().string(equalTo("===")));

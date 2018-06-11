@@ -1,4 +1,4 @@
-package com.fm.expboot.common;
+package com.fm.expboot.common.exception;
 
 public class BusinessException extends RuntimeException {
 
