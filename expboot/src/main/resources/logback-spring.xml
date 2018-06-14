@@ -2,14 +2,19 @@
 <!DOCTYPE configuration>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 	<!-- spring环境配置变量 -->
-<!-- 	<springProperty scope="context" name="appName" source="spring.application.name"/> -->
+	<springProperty scope="context" name="appName" source="spring.application.name"/>
+	<springProperty scope="context" name="logDir" source="log.dir"/>
+	<springProperty scope="context" name="logLevel" source="log.level"/>
+	
 <!--  	<springProfile name="dev"> -->
-<!-- 		<property name="appName" value="cst-dev" /> -->
-<!-- 		<property name="logDir" value="./logs/${appName}" /> -->
+<!-- 		<property name="logPath" value="${logDir}${appName}" /> -->
 <!-- 	</springProfile> -->
 
-	<property name="appName" value="cst-pro" />
-	<property name="logDir" value="./logs/${appName}" />
+<!-- 	<springProfile name="pro"> -->
+<!-- 		<property name="logPath" value="${logDir}${appName}" /> -->
+<!-- 	</springProfile> -->
+
+	<property name="logPath" value="${logDir}${appName}" />
 
 	<!-- log上下文 -->
 	<contextName>${appName}</contextName>
@@ -35,9 +40,9 @@
 	<!-- 系统日志 -->
 	<appender name="allLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<prudent>false</prudent>
-<!-- 		 <file>${logDir}/sysAll.log</file> -->
+<!-- 		 <file>${logPath}/sysAll.log</file> -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysAll%d{yyyyMMdd}#%i.log.gz</fileNamePattern>
+			<fileNamePattern>${logPath}/%d{yyyy-MM-dd}/sysAll%d{yyyyMMdd}#%i.log.gz</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>    
 			<maxHistory>60</maxHistory>
 			<totalSizeCap>10GB</totalSizeCap>
@@ -60,7 +65,7 @@
 		</filter>
 		<!-- 滚动策略 -->
 <!-- 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> -->
-<!-- 			<FileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</FileNamePattern> -->
+<!-- 			<FileNamePattern>${logPath}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</FileNamePattern> -->
 <!-- 			<MaxHistory>31</MaxHistory> -->
 <!-- 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">   -->
 <!-- 		    	<maxFileSize>30MB</maxFileSize>   -->
@@ -68,7 +73,7 @@
 <!-- 		</rollingPolicy> -->
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logDir}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</fileNamePattern>
+			<fileNamePattern>${logPath}/%d{yyyy-MM-dd}/sysError%d{yyyyMMdd}#%i.log</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>    
 			<maxHistory>60</maxHistory>
 			<totalSizeCap>3GB</totalSizeCap>
@@ -138,7 +143,7 @@
 	<logger name="org.springframework.boot.devtools" level="warn"/>
    	<logger name="org.apache.activemq" level="info"/>
     
-	<root level="info">
+	<root level="${logLevel}">
 		<appender-ref ref="console" />
 		<appender-ref ref="allLog" />
 		<appender-ref ref="errorLog" />

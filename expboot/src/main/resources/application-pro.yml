@@ -23,3 +23,7 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+
+log:
+  dir: ./logs-pro/
+  level: info
