@@ -28,11 +28,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.fm.expboot.db.mapper.UserMapper;
 import com.fm.expboot.db.model.User;
 import com.fm.expboot.service.UserService;
 import com.github.pagehelper.PageHelper;
+
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * 用户服务实现
@@ -49,7 +52,18 @@ public class UserServiceImpl implements UserService {
 		if (user.getPageNum() != null && user.getPageSize() != null) {
 			PageHelper.startPage(user.getPageNum(), user.getPageSize(), "id");
 		}
-		return userMapper.selectAll();
+
+		Example example = new Example(User.class);
+		Example.Criteria criteria = example.createCriteria();
+		if (!StringUtils.isEmpty(user.getUserName())) {
+			criteria.andEqualTo("userName", user.getUserName());
+		}
+
+		if (!StringUtils.isEmpty(user.getPhone())) {
+			criteria.andEqualTo("phone", user.getPhone());
+		}
+
+		return userMapper.selectByExample(example);
 	}
 
 	@Override

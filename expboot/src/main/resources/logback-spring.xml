@@ -3,9 +3,14 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 	<!-- spring环境配置变量 -->
 <!-- 	<springProperty scope="context" name="appName" source="spring.application.name"/> -->
-	<property name="appName" value="cst" />
+<!--  	<springProfile name="dev"> -->
+<!-- 		<property name="appName" value="cst-dev" /> -->
+<!-- 		<property name="logDir" value="./logs/${appName}" /> -->
+<!-- 	</springProfile> -->
+
+	<property name="appName" value="cst-pro" />
 	<property name="logDir" value="./logs/${appName}" />
-	
+
 	<!-- log上下文 -->
 	<contextName>${appName}</contextName>
 	
@@ -139,5 +144,5 @@
 		<appender-ref ref="errorLog" />
 <!--		<appender-ref ref="jmsAppender" />-->
 	</root>
-	
+
 </configuration>
