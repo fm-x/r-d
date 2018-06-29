@@ -1,3 +1,4 @@
+---
 spring:
   application:
     name: fm-service-producer
@@ -24,27 +25,39 @@ spring:
     port: 5672
     username: user-cloud
     password: 123
-  
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:10012
+        instance:
+          service-base-url: http://localhost:${server.port}
+#        username: "admin"
+#        password: "123"
+#        instance:
+#          metadata:
+#            user.name: "admin"
+#            user.password: "123"
+            
 eureka:
   instance:
-    lease-renewal-interval-in-seconds: 15000    # client发送心跳给server端的频率，默认30秒
-    lease-expiration-duration-in-seconds: 30000 # server至上一次收到client端的心跳之后，等待下一次心跳的超时时间，默认为90秒
+    lease-renewal-interval-in-seconds: 10    # client发送心跳给server端的频率，默认30秒
+    lease-expiration-duration-in-seconds: 30 # server至上一次收到client端的心跳之后，等待下一次心跳的超时时间，默认为90秒
   server:
     eviction-interval-timer-in-ms: 5000         # server清理无效节点的时间间隔，默认60秒
     enable-self-preservation: true              # 是否开启自我保护模式，默认为true
   client:
-    registry-fetch-interval-seconds: 5000       # 读取服务注册信息频率，默认为30秒
+    registry-fetch-interval-seconds: 5       # 读取服务注册信息频率，默认为30秒
     serviceUrl:
       defaultZone: http://localhost:8891/eureka/
 
 management:
-  security:
-    enabled: false  # 刷新时，关闭安全验证
+#  security:
+#    enabled: false  # 刷新时，关闭安全验证
   endpoints:
     web:
       exposure:
         include: "*" # 暴露端点(health,mappings,bus-refresh)
+...
 
 ---
 spring:

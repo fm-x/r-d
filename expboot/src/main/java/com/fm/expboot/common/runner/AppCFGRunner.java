@@ -25,7 +25,7 @@ public class AppCFGRunner implements ApplicationRunner {
 
 	@Autowired
 	protected ApplicationProperties appPro;
-
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		Map<String, String> serviceMap = appPro.getService();

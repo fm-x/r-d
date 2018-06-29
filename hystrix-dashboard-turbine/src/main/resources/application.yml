@@ -6,8 +6,10 @@ server:
   port: 10010
 
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10  # client发送心跳给server端的频率，默认30秒 
   client:
-#    registry-fetch-interval-seconds: 5000 # 读取服务注册信息频率，默认为30秒
+    registry-fetch-interval-seconds: 5 # 读取服务注册信息频率，默认为30秒
     serviceUrl:
       defaultZone: http://localhost:8891/eureka/
 
@@ -16,10 +18,10 @@ management:
     web:
       base-path: /
       exposure:
-        include: turbine.stream
+        include: "*"
 
 turbine:
-  appConfig: msg-cstm-x1,msg-cstm-x1
+  appConfig: msg-cstm-x1,msg-cstm-x2
 #  clusterNameExpression: metadata['cluster']
   clusterNameExpression: new String("default")
   aggregator:

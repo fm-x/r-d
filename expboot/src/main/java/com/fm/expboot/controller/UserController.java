@@ -38,8 +38,12 @@ public class UserController extends BaseController {
 	@RequestMapping("/cfg")
 	public Object cfg() {
 		Map<String, String> cfgMap = appPro.getService();
-		LOGGER.info("->" + cfgMap);
-		LOGGER.info("thirdUrl[{}]", appPro.getThirdUrl());
+		LOGGER.info(">" + cfgMap);
+		LOGGER.info("ThirdUrl:{}", appPro.getThirdUrl());
+		LOGGER.info("WhiteList:{}", appPro.getWhiteList());
+		
+		LOGGER.debug("=============================warn=======================");
+		LOGGER.debug("=============================error=======================");
 		return cfgMap;
 	}
 

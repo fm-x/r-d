@@ -10,11 +10,10 @@ cfg:
     error.param:
       code: 01000
       msg: 参数错误
+  whiteList: [127.0.0.1, 10.62.3.145]
 ...
 
 --- # Third party information
 third:
   url: http://23.126.78.10/test
 ...
-
-      

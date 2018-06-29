@@ -1,5 +1,6 @@
 package com.fm.expboot.common;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -8,13 +9,14 @@ import org.springframework.stereotype.Component;
 
 /**
  * 配置文件映射对象
- *
  */
 @Component
 @ConfigurationProperties(prefix = "cfg", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
 	private Map<String, String> service;
+
+	private List<String> whiteList;
 
 	@Value("${third.url}")
 	private String thirdUrl;
@@ -36,6 +38,14 @@ public class ApplicationProperties {
 
 	public void setThirdUrl(String thirdUrl) {
 		this.thirdUrl = thirdUrl;
+	}
+
+	public List<String> getWhiteList() {
+		return whiteList;
+	}
+
+	public void setWhiteList(List<String> whiteList) {
+		this.whiteList = whiteList;
 	}
 
 	public String getAppName() {

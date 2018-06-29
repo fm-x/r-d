@@ -1,6 +1,14 @@
+---
 spring:
   application:
     name: eureka-cluster
+
+eureka:
+  instance:
+      lease-renewal-interval-in-seconds: 10  # client发送心跳给server端的频率，默认30秒
+  client:
+    registry-fetch-interval-seconds: 5 # 读取服务注册信息频率，默认为30秒
+...
 
 ---
 spring:
@@ -21,6 +29,7 @@ eureka:
 #    fetch-registry: true
     serviceUrl:
       defaultZone: http://server2:8892/eureka/,http://server3:8893/eureka/
+...
 
 ---
 spring:
@@ -35,6 +44,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://server1:8891/eureka/,http://server3:8893/eureka/
+...
 
 ---
 spring:
@@ -49,3 +59,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://server1:8891/eureka/,http://server2:8892/eureka/
+...

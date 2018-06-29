@@ -1,7 +1,4 @@
-﻿#server:
-#  port: 8088
-
-spring:
+﻿spring:
   profiles:
     active: "@profileActive@"  
   application:
@@ -34,7 +31,12 @@ spring:
       enabled: true
       force: true
       charset: UTF-8
-
+#  boot:
+#    admin:
+#      client:
+#       url: http://localhost:10012
+#management.security.enabled: false
+  
 server.tomcat.uri-encoding: UTF-8
 
 #logging.config: classpath:logback-spring-${spring.profiles.active}.xml

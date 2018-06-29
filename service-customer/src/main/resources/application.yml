@@ -1,3 +1,4 @@
+---
 spring:
   zipkin:
     baseUrl: http://localhost:10011
@@ -8,7 +9,7 @@ spring:
     host: localhost
     port: 5672
     username: user-cloud
-    password: 123      
+    password: 123
 
 feign:
   hystrix:
@@ -20,13 +21,13 @@ ribbon:
   ServerListRefreshInterval: 3000 # #eureka客户端ribbon刷新时间
 
 management:
-  security:
-    enabled: false  # 刷新时，关闭安全验证
+#  security:
+#    enabled: false  # 刷新时，关闭安全验证
   endpoints:
     web:
       base-path: /
       exposure:
-        include: hystrix.stream
+        include: "*"
 
 zuul:
 #  routes:
@@ -41,6 +42,7 @@ zuul:
 customer:
   tag: # 服务端服务根路径
     zuul-msg: /cst
+...
 
 ---
 spring:

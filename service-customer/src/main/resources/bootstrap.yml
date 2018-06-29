@@ -14,18 +14,18 @@ spring:
 
 eureka:
   instance:
-    lease-renewal-interval-in-seconds: 15000  # client发送心跳给server端的频率，默认30秒
-    lease-expiration-duration-in-seconds: 30000 # server至上一次收到client端的心跳之后，等待下一次心跳的超时时间，默认为90秒
+    lease-renewal-interval-in-seconds: 10  # client发送心跳给server端的频率，默认30秒
+    lease-expiration-duration-in-seconds: 30 # server至上一次收到client端的心跳之后，等待下一次心跳的超时时间，默认为90秒
   server:
     eviction-interval-timer-in-ms: 5000 # server清理无效节点的时间间隔，默认60秒
     enable-self-preservation: true  # 是否开启自我保护模式，默认为true
   client:
-    registry-fetch-interval-seconds: 5000 # 读取服务注册信息频率，默认为30秒
+    registry-fetch-interval-seconds: 5 # 读取服务注册信息频率，默认为30秒
     serviceUrl:
       defaultZone: http://localhost:8891/eureka/
 
 producer: # 服务端配置
-  tag: 
+  tag:
     msg: /msg
   serviceId:
     msg: fm-service-producer

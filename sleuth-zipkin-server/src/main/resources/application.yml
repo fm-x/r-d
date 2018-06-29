@@ -6,7 +6,15 @@ server:
   port: 10011
 
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10  # client发送心跳给server端的频率，默认30秒  
   client:
-    registry-fetch-interval-seconds: 5000 # 读取服务注册信息频率，默认为30秒
+    registry-fetch-interval-seconds: 5 # 读取服务注册信息频率，默认为30秒
     serviceUrl:
       defaultZone: http://localhost:8891/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

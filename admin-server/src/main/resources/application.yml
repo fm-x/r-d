@@ -1,16 +1,37 @@
 spring:
   application:
     name: admin-server
-
+  security:
+    user:
+      name: "admin"
+      password: "123"
+#  boot:
+#    admin:
+#      ui:
+#        cache:
+#          no-cache: true
+#        cache-templates: false
 server:
   port: 10012
 
 eureka:
-#  instance:
-#    lease-renewal-interval-in-seconds: 15000  # client发送心跳给server端的频率，默认30秒
+  instance:
+#    metadata-map:
+#      user:
+#        name: "admin"
+#        password: "123"
+    lease-renewalIntervalInSeconds: 10  # client发送心跳给server端的频率，默认30秒
+    health-check-url-path: /actuator/health
   client:
-#    registry-fetch-interval-seconds: 5000 # 读取服务注册信息频率，默认为30秒
+    registryFetchIntervalSeconds: 5 # 读取服务注册信息频率，默认为30秒
     serviceUrl:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8891}/eureka/
       
-management.security.enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
