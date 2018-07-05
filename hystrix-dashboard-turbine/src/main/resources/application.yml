@@ -26,3 +26,4 @@ turbine:
   clusterNameExpression: new String("default")
   aggregator:
     clusterConfig: default
+  combine-host-port: true # 通过主机名与端口号的组合来进行区分，默认以host来区分不同的服务

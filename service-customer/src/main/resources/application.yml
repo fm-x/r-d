@@ -25,7 +25,7 @@ management:
 #    enabled: false  # 刷新时，关闭安全验证
   endpoints:
     web:
-      base-path: /
+#      base-path: /actuator
       exposure:
         include: "*"
 

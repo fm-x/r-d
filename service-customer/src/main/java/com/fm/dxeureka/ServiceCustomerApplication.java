@@ -15,7 +15,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableCircuitBreaker
-//@EnableTurbine
 @EnableZuulProxy
 public class ServiceCustomerApplication {
 
@@ -26,25 +25,16 @@ public class ServiceCustomerApplication {
 
 	}
 
+ 
+	// NOTE: 1.X版本
 //	@Bean
-//	@LoadBalanced
-//	RestTemplate restTemplate() {
-//		return new RestTemplate();
+//	public ServletRegistrationBean<HystrixSampleSseServlet> getServlet() {
+//		HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+//		ServletRegistrationBean<HystrixSampleSseServlet> registrationBean = new ServletRegistrationBean<>(streamServlet);
+//		registrationBean.setLoadOnStartup(1);
+//		registrationBean.addUrlMappings("/hystrix.stream");
+//		registrationBean.setName("HystrixMetricsStreamServlet");
+//		return registrationBean;
 //	}
-//
-////	@Bean
-////	public ServletRegistrationBean<HystrixSampleSseServlet> getServlet() {
-////		HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-////		ServletRegistrationBean<HystrixSampleSseServlet> registrationBean = new ServletRegistrationBean<>(streamServlet);
-////		registrationBean.setLoadOnStartup(1);
-////		registrationBean.addUrlMappings("/hystrix.stream");
-////		registrationBean.setName("HystrixMetricsStreamServlet");
-////		return registrationBean;
-////	}
-//
-//	@Bean
-//	public AuthenticationFilter authenticationFilter() {
-//		return new AuthenticationFilter();
-//	}
-	
+
 }

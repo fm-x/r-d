@@ -11,7 +11,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @RestController
 public class CTMController extends BaseController {
-
 	@Autowired
 	MsgRemote msgRemote;
 
@@ -28,8 +27,11 @@ public class CTMController extends BaseController {
 
 	@RequestMapping("/cfg")
 	public String cfgEvent() {
-		return cfg;
+		System.out.println("fileCfg:" + config.getFile());
+		System.out.println("desCfg:" + config.getDes());
+		System.out.println("cfg:" + config);
+		return config.toString();
 	}
 
-	// http://localhost:10101/fm-service-producer/msg/notice?obj=%E4%B8%AD%E5%9B%BD
+	// zuul: http://localhost:10101/fm-service-producer/msg/notice?obj=%E4%B8%AD%E5%9B%BD
 }

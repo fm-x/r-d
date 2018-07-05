@@ -7,7 +7,7 @@ spring:
       server:
         git:    
           uri: https://github.com/fm-x/configuration-center # git仓库的地址
-          search-paths: msg                                 # git仓库地址下的相对地址，可以配置多个<用,分割>。
+          search-paths: msg,msg-bak                         # git仓库地址下的相对地址，可以配置多个<用,分割>。
           username:                                         # git仓库的账号
           password:                                         # git仓库的密码
     bus:
@@ -55,6 +55,7 @@ management:
 #    enabled: false  # 刷新时，关闭安全验证
   endpoints:
     web:
+#      base-path: /actuator
       exposure:
         include: "*" # 暴露端点(health,mappings,bus-refresh)
 ...

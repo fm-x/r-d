@@ -30,7 +30,7 @@ public class MsgController {
 	}
 	
 	/*
-	 *  http://localhost:15672
+	 *  RabbitMQ: http://localhost:15672
 	 *  http://localhost:9001/actuator/bus-refresh
 	 */
 }
