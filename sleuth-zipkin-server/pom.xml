@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<zipkin.version>2.9.4</zipkin.version>
+		<zipkin.version>2.9.3</zipkin.version>
 	</properties>
 
 	<dependencies>

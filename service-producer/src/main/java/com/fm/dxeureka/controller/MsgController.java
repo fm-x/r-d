@@ -31,6 +31,7 @@ public class MsgController {
 	
 	/*
 	 *  RabbitMQ: http://localhost:15672
-	 *  http://localhost:9001/actuator/bus-refresh
+	 *  POST: http://localhost:9001/actuator/bus-refresh
+	 *  GET:  http://localhost:9001/actuator/httptrace
 	 */
 }

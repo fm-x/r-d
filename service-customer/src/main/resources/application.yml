@@ -1,7 +1,7 @@
 ---
 spring:
   zipkin:
-    baseUrl: http://localhost:10011
+    base-url: http://localhost:10011
   sleuth:
     sampler:
       percentage: 1.0 # 采样比例(0.0 ~ 1.0)
@@ -10,7 +10,14 @@ spring:
     port: 5672
     username: user-cloud
     password: 123
-
+  boot:
+    admin:
+      client:
+        url: http://localhost:10012
+        instance:
+          service-base-url: http://localhost:${server.port}
+        username: "admin"
+        password: "123"
 feign:
   hystrix:
     enabled: true

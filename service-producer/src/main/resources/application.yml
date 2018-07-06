@@ -31,8 +31,8 @@ spring:
         url: http://localhost:10012
         instance:
           service-base-url: http://localhost:${server.port}
-#        username: "admin"
-#        password: "123"
+        username: "admin"
+        password: "123"
 #        instance:
 #          metadata:
 #            user.name: "admin"
